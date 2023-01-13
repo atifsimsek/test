@@ -1,8 +1,15 @@
-import React from 'react'
+import styles from "../styles/modules/header.module.scss"
+import BrandIcon from '../assets/Icon'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <header className={styles.header}>
+      <div className={styles.headerContainer}>
+        <BrandIcon size={35} />
+        <h2 className={styles.title}>Business Tracking App</h2>
+      </div>
+      <hr />
+    </header>
   )
 }
 
