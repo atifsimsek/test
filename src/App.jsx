@@ -14,8 +14,8 @@ function App() {
         <Filter />
         {/* <List /> */}
         <TableMuı />
-        <Footer />
       </div>
+        <Footer />
     </>
   );
 }
