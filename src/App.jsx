@@ -1,11 +1,11 @@
 import Header from "./components/Header";
-import Inputs from "./components/Inputs";
+import Form from "./components/Form";
 
 function App() {
   return (
     <div className="container">
       <Header />
-      <Inputs/>
+      <Form/>
 
 
     </div>

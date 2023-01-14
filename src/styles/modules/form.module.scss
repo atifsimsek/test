@@ -1,0 +1,107 @@
+.form {
+    padding-top: 5rem;
+
+    .form-container {
+
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+
+        .input-box {
+            position: relative;
+            padding: 1rem;
+            width: 60%;
+
+
+
+
+            input {
+                width: 100%;
+                height: 35px;
+                border: 1px solid var(--gray-2);
+                border-radius: 3px;
+                padding: 2rem;
+                display: block;
+
+
+
+                &:focus {
+                    outline: none;
+                    background-color: transparent;
+                }
+
+
+
+
+                &:focus+label {
+                    background-color: var(--bg-1);
+                    top: 1px;
+                    font-size: 1.2rem;
+                    opacity: 100%;
+
+                }
+
+
+            }
+
+            label {
+                position: absolute;
+                inset: 0;
+                top: 21px;
+                left: 18px;
+                font-size: 1.3rem;
+                text-align: center;
+                pointer-events: none;
+                width: 99px;
+                height: 20px;
+                z-index: 10;
+                transition: all 0.3s ease;
+                opacity: 80%;
+            }
+
+        }
+
+        select {
+            width: 20%;
+            height: 43px;
+            border: 1px solid var(--gray-2);
+            border-radius: 3px;
+            padding-left: 1.2rem;
+            flex-shrink: 0;
+
+            &:focus {
+                outline: none;
+            }
+
+        }
+
+        .btn {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background-color: var(--bg-3);
+            border: 3px solid var(--primaryPurple);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+
+            .icon {
+                color: whitesmoke;
+                text-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+}
