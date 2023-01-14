@@ -1,0 +1,32 @@
+.btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn {
+        padding: 0.5rem;
+        background-color: red;
+        background: none;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--bg-1);
+        }
+
+        .icon {
+            color: var(--primaryPurple);
+
+        }
+    }
+}
+
+input {
+    accent-color: var(--primaryPurple);
+}

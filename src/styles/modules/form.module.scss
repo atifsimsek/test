@@ -1,5 +1,5 @@
 .form {
-    padding-top: 5rem;
+    padding-top: 3rem;
 
     .form-container {
 
@@ -38,6 +38,7 @@
                     top: 1px;
                     font-size: 1.2rem;
                     opacity: 100%;
+                    color: black;
 
                 }
 
@@ -56,7 +57,8 @@
                 height: 20px;
                 z-index: 10;
                 transition: all 0.3s ease;
-                opacity: 80%;
+                opacity: 90%;
+                color: var(--black-1);
             }
 
         }
@@ -89,7 +91,7 @@
             flex-shrink: 0;
 
             .icon {
-                color: whitesmoke;
+                color: white;
                 text-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
             }
 
