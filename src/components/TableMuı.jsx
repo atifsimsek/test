@@ -1,4 +1,5 @@
-import * as React from 'react';
+/* eslint-disable array-callback-return */
+import { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,55 +9,18 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import styles from "../styles/modules/tableMuı.module.scss"
-import Actions, { Completed } from './Actions';
+import columns from '../utils/colums';
+import { useSelector } from 'react-redux';
+import { selectJobs } from '../redux/Slice/jobsSlice';
 
-const columns = [
-  { id: 's', label: 'S/N', minWidth: 70 },
-  { id: 'name', label: 'Name', minWidth: 150 },
-  {
-    id: 'priority',
-    label: 'Priority',
-    minWidth: 100,
-    align: 'center',
-  },
-  {
-    id: 'completed',
-    label: 'Completed',
-    minWidth: 100,
-    align: 'center',
 
-  },
-  {
-    id: 'action',
-    label: 'Action',
-    minWidth: 100,
-    align: 'center',
-  },
-];
-
-function createData(s, name, priority, completed, action) {
-
-  return { s, name, priority, completed, action };
-}
-
-const rows = [
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(2, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-  createData(1, 'isim', "öncelik", <Completed />, <Actions />),
-
-];
 
 function TableMuı() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const data = useSelector(selectJobs)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -73,12 +37,12 @@ function TableMuı() {
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table className={styles.test} stickyHeader aria-label="sticky table" >
             <TableHead>
-              <TableRow  >
+              <TableRow >
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth: column.minWidth, }}
                     className={styles.title}
                   >
                     {column.label}
@@ -87,15 +51,17 @@ function TableMuı() {
               </TableRow>
             </TableHead>
             <TableBody >
-              {rows
+              {data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            className={row.completed ? `${styles.completed}` : ""}
+                            key={column.id} align={column.align}>
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
@@ -111,7 +77,7 @@ function TableMuı() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

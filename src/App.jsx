@@ -1,9 +1,8 @@
 import Header from "./components/Header";
 import Form from "./components/Form";
 import Filter from "./components/Filter";
-import List from "./components/List";
-import TableMuı from "./components/TableMuı";
 import Footer from "./components/Footer";
+import  List  from "./components/List";
 
 function App() {
   return (
@@ -12,10 +11,9 @@ function App() {
         <Header />
         <Form />
         <Filter />
-        {/* <List /> */}
-        <TableMuı />
+        <List />
       </div>
-        <Footer />
+      <Footer />
     </>
   );
 }

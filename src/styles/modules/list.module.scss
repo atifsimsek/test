@@ -1,84 +1,110 @@
 .list {
     margin-top: 3rem;
 
+    .sticky {
+        max-height: 500px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        overflow-y: scroll;
 
-    table {
-        width: 100%;
-        min-height: 10px;
-        border: 1px solid var(--bg-3);
-        border-collapse: collapse;
-        border-radius: 3px;
-        padding: 5rem;
-        overflow: scroll;
-
-        tr {
-            
-            transition: 0.3s;
-
-            &:nth-child(odd) {
-                background-color: var(--bg-2);
-            }
-
-            &:hover {
-                background-color: var(--bg-3);
-            }
-
-
-
-            th {
-                padding: 1.5rem;
-                background-color: var(--black-1);
-                color: white;
-                text-align: start;
-                font-size: 1.1rem;
-            }
-
-            td {
-                padding: 1.5rem;
-                text-align: start;
-                font-size: 1.1rem;
-
-
-
-                input {
-                    margin-left: 2.1rem;
-                    accent-color: var(--primaryPurple);
-                }
-
-            }
-
-            .btn-box {
-                display: flex;
-                align-items: center;
-                justify-content: start;
-                gap: 1rem;
-                margin-left: -1.2rem;
-
-                .btn {
-                    padding: 0.5rem;
-                    background-color: red;
-                    background: none;
-                    border: none;
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: 0.3s;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: var(--bg-1);
-                    }
-
-                    .icon {
-                        color: var(--primaryPurple);
-
-                    }
-                }
-            }
+        &::-webkit-scrollbar {
+            // width: 15px;
+            display: none;
         }
 
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(151, 151, 151, 0.76);
+            border: 4px solid transparent;
+            border-radius: 10px;
+            background-clip: padding-box;
+
+        }
+
+        table {
+            width: 100%;
+            border: 1px solid var(--bg-3);
+            border-collapse: collapse;
+
+            tr {
+                transition: 0.3s;
+
+                &:nth-child(even) {
+                    background-color: var(--bg-2);
+                }
+
+                &:hover {
+                    background-color: var(--bg-3);
+                }
 
 
+                .name {
+                    width: 50%;
+                }
+
+                th {
+                    position: sticky;
+                    top: 0;
+                    padding: 1.5rem;
+                    background-color: var(--black-1);
+                    color: white;
+                    text-align: start;
+                    font-size: 1.1rem;
+
+
+                }
+
+                td {
+
+
+                    padding: 1.5rem;
+                    text-align: start;
+                    font-size: 1.1rem;
+
+                    input {
+                        margin-left: 2.1rem;
+                        accent-color: var(--primaryPurple);
+                    }
+
+                }
+
+                .btn-box {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    padding: 1.5rem;
+                    gap: 1rem;
+                    margin-left: -1.2rem;
+
+                    .btn {
+                        padding: 0.5rem;
+                        background-color: red;
+                        background: none;
+                        border: none;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: 0.3s;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: var(--bg-1);
+                        }
+
+                        .icon {
+                            color: var(--primaryPurple);
+
+                        }
+                    }
+                }
+            }
+
+
+            .completed {
+                text-decoration: line-through;
+                opacity: 50%;
+            }
+
+        }
     }
 }
