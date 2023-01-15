@@ -1,0 +1,45 @@
+.inputs-container {
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    .input-box {
+        padding: 1rem;
+        width: 100%;
+
+
+
+        input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid var(--gray-2);
+            border-radius: 3px;
+            padding: 2rem;
+            display: block;
+        }
+
+
+
+    }
+
+
+
+    select {
+        width: 50%;
+        height: 43px;
+        border: 1px solid var(--gray-2);
+        border-radius: 3px;
+        padding-left: 1.2rem;
+        flex-shrink: 0;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+  
+}

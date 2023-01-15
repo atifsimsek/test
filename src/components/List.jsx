@@ -1,64 +1,102 @@
 import styles from '.././styles/modules/list.module.scss'
-import { BiEdit } from "react-icons/bi"
-import { AiOutlineDelete } from "react-icons/ai"
-import { useSelector } from 'react-redux'
-import { selectJobs } from '../redux/Slice/jobsSlice'
-import Actions, { Completed } from './Actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { addSelectedJob, changeEdit, editJob, removeJob, selectEdit, selectJobs, toggleCompleted } from '../redux/Slice/jobsSlice'
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Modal, Space } from 'antd';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { BiEdit } from 'react-icons/bi';
+import EditModal from './EditModal';
+import { useState } from 'react';
+
+const { confirm } = Modal;
+
 
 const List = () => {
     const jobs = useSelector(selectJobs)
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch()
 
+    const handleToggle = (id, completed) => {
+        dispatch(toggleCompleted({ id, completed: !completed }))
+    }
+
+    const showDeleteConfirm = (id) => {
+        confirm({
+            title: 'Are you sure delete this job?',
+            icon: <ExclamationCircleFilled />,
+            okText: 'Yes',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                dispatch(removeJob(id))
+
+            },
+            onCancel() {
+
+            },
+        });
+    };
+
+    const showEditConfirm = (id, name) => {
+        setOpen(true)
+        dispatch(addSelectedJob({ id, name }))
+
+    }
 
     return (
-        <section className={styles.list}>
-            <div className={styles.sticky}>
-                <table>
-                    <thead >
-                        <tr>
-                            <th>S/N</th>
-                            <th>Name</th>
-                            <th>Priority</th>
-                            <th>Completed</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+        <>
+            {<EditModal open={open} setOpen={setOpen} />}
+            <section className={styles.list}>
+                <div className={styles.sticky}>
+                    <table>
+                        <thead >
+                            <tr>
+                                <th>S/N</th>
+                                <th>Name</th>
+                                <th>Priority</th>
+                                <th>Completed</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {
-                            jobs.map((job, index) => (
-                                <tr
-                                    key={job.id}
-                                    className={job.completed ? "" : `${styles.completed}`}
-                                >
-                                    <td>{index + 1}</td>
-                                    <td className={styles.name}>{job.name}</td>
-                                    <td>{job.priority}</td>
-                                    <td>
-                                        <Completed id={job.id} completed={job.completed} />
-                                    </td>
-                                    <Actions />
-                                </tr>
-                            ))
-                        }
-                    </tbody>
+                        <tbody>
+                            {
+                                jobs.map((job, index) => (
+                                    <tr
+                                        key={job.id}
+                                        className={job.completed ? "" : `${styles.completed}`}
+                                    >
+                                        <td>{index + 1}</td>
+                                        <td className={styles.name}>{job.name}</td>
+                                        <td>{job.priority}</td>
+                                        <td>
+                                            <input
+                                                checked={!job.completed}
+                                                onChange={() => { handleToggle(job.id, job.completed) }}
+                                                type="checkbox"
+                                            />
+                                        </td>
+                                        <td className={styles["btn-box"]}>
+                                            <button
+                                                onClick={() => { showEditConfirm(job.id, job.name) }}
+                                                className={styles.btn}>
+                                                <BiEdit className={styles.icon} size={16} />
+                                            </button>
+                                            <button
+                                                onClick={() => { showDeleteConfirm(job.id) }}
+                                                className={styles.btn}>
+                                                <AiOutlineDelete className={styles.icon} size={16} />
+                                            </button>
+                                        </td>
 
-
-                    {/* <tr>
-                        <td>1</td>
-                        <td className={styles.name}>Isim</td>
-                        <td>Öncelik</td>
-                        <td>
-                            <input type="checkbox" name="" id="" />
-                        </td>
-                        <td className={styles["btn-box"]}>
-                            <button className={styles.btn}><BiEdit className={styles.icon} size={16} /></button>
-                            <button className={styles.btn}><AiOutlineDelete className={styles.icon} size={16} /></button>
-                        </td>
-                    </tr> */}
-
-                </table>
-            </div>
-        </section>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </>
     )
 }
 
