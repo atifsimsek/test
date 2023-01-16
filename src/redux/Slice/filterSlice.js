@@ -14,13 +14,12 @@ const filterSlice = createSlice({
         searchWork: (state, action) => {
             let tempWorks = []
             const { works, search } = action.payload
-
-            if (search === "") {
-                tempWorks = works.slice().sort((a, b) => a.priorityNumber - b.priorityNumber)
-            }
+            
             tempWorks = works.filter((work) => work.name.toLowerCase().includes(search.toLowerCase()) ||
                 work.priority.toLowerCase().includes(search.toLowerCase()))
             state.filteredWorks = tempWorks
+
+
 
         },
         filterWork: (state, action) => {
@@ -32,7 +31,7 @@ const filterSlice = createSlice({
             }
             else if (filter === "t-o") {
                 tempWorks = works.slice().sort((a, b) => b.priorityNumber - a.priorityNumber)
-            
+
 
             }
             else {

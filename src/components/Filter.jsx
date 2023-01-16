@@ -14,8 +14,8 @@ const Filter = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(searchWork({ works, search, filter }))
-  }, [search, filter, works, dispatch])
+    dispatch(searchWork({ works, search }))
+  }, [search, works, dispatch])
 
   useEffect(() => {
     dispatch(filterWork({ works, filter }))
