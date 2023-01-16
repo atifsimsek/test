@@ -35,7 +35,7 @@ const List = () => {
             cancelText: 'No',
             onOk() {
                 dispatch(removeWork(id))
-                toast.success("work deleted")
+                toast.success("Work deleted")
 
             },
             onCancel() {

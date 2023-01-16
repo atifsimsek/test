@@ -76,7 +76,7 @@ const worksSlice = createSlice({
             }
 
         },
-        removework: (state, action) => {
+        removeWork: (state, action) => {
             const filterWorks = state.works.filter(work => work.id !== action.payload)
             state.works = filterWorks
 
