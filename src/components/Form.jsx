@@ -38,6 +38,9 @@ const Form = () => {
         name: work,
         priority: priority,
       }))
+      
+      setWork("")
+      setPriority("choose")
       toast.success("Work added")
 
     }
