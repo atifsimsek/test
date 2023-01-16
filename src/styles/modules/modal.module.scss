@@ -1,12 +1,12 @@
 .inputs-container {
     width: 100%;
-    padding: 3rem;
+    padding: 3.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-
+    gap: 3.5rem;
+    
     .input-box {
         padding: 1rem;
         width: 100%;
@@ -26,20 +26,30 @@
 
     }
 
+    .select-box {
+        width: 95%;
+        position: relative;
 
+        select {
+            width: 100%;
+            height: 43px;
+            border: 1px solid var(--gray-2);
+            border-radius: 3px;
+            padding-left: 1.2rem;
+            flex-shrink: 0;
 
-    select {
-        width: 50%;
-        height: 43px;
-        border: 1px solid var(--gray-2);
-        border-radius: 3px;
-        padding-left: 1.2rem;
-        flex-shrink: 0;
+            &:focus {
+                outline: none;
+            }
+        }
 
-        &:focus {
-            outline: none;
+        label {
+            position: absolute;
+            top: -22px;
         }
     }
 
-  
+
+
+
 }

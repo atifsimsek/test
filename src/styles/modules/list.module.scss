@@ -1,15 +1,21 @@
 .list {
     margin-top: 3rem;
+    padding-bottom: 10rem !important;
+    display: flex;
+    flex-direction: column;
+
 
     .sticky {
-        max-height: 500px;
+
+        max-height: 600px;
         border-radius: 5px;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        overflow-y: scroll;
+        overflow: scroll;
+
 
         &::-webkit-scrollbar {
-            // width: 15px;
-            display: none;
+            width: 15px;
+
         }
 
         &::-webkit-scrollbar-thumb {
@@ -24,6 +30,7 @@
             width: 100%;
             border: 1px solid var(--bg-3);
             border-collapse: collapse;
+
 
             tr {
                 transition: 0.3s;
@@ -50,20 +57,45 @@
                     text-align: start;
                     font-size: 1.1rem;
 
+                }
+
+                .box {
+                    margin-left: -3.2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
                 }
 
                 td {
 
-
+                    font-weight: bold;
                     padding: 1.5rem;
                     text-align: start;
                     font-size: 1.1rem;
 
                     input {
-                        margin-left: 2.1rem;
+                        margin-left: 2.3rem;
                         accent-color: var(--primaryPurple);
                     }
+
+                    .priority {
+                        text-align: center;
+                        padding: 1rem;
+                        border-radius: 0.5rem;
+                        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                        text-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                        font-weight: bold;
+                        background-color: rgb(26, 94, 243);
+                        margin-left: -3rem;
+                        color: white;
+
+                    }
+
+
+
+
+
 
                 }
 
@@ -105,6 +137,38 @@
                 opacity: 50%;
             }
 
+
+
         }
     }
+
+    .clear {
+        background-color: var(--primaryPurple);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-top: 2rem;
+        width: 50%;
+        align-self: center;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+
+    .box {
+        margin-left: 1.5rem !important;
+    }
+
+}
+
+
+@media screen and (max-width: 700px) {
+
+
+    .box {
+        margin-left: 1.5rem !important;
+    }
+
 }

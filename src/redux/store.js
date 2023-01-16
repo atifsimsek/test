@@ -1,7 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
-import jobsReducer from "./Slice/jobsSlice"
+import worksReducer from "./Slice/worksSlice"
+import filterReducer from "./Slice/filterSlice"
 const rootReducer = combineReducers({
-    jobs: jobsReducer
+    works: worksReducer,
+    filter: filterReducer
 })
 
 const store = configureStore({

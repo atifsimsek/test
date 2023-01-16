@@ -1,53 +1,84 @@
 import styles from '../styles/modules/form.module.scss'
 import { HiOutlinePlus } from "react-icons/hi"
 import { useState } from 'react'
+import { addWork } from '../redux/Slice/worksSlice'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
-import { addJob, selectJobs } from '../redux/Slice/jobsSlice'
-import { useDispatch, useSelector } from 'react-redux'
+
 
 const Form = () => {
-  const [job, setJob] = useState("")
-  const [priority, setPriority] = useState("regular")
+  const [work, setWork] = useState("")
+  const [priority, setPriority] = useState("choose")
   const dispatch = useDispatch();
 
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addJob({
-      name: job,
-      priority: priority,
-    }))
+  //Control the Input
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const isValid = /^[a-zA-Z0-9\s]*$/.test(value) && value.length <= 255;
+    if (isValid) {
+      setWork(value);
+    } else {
+      toast.error("Value must contain alphanumeric characters and have a length of 255 characters or less.")
+    }
   }
 
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (work === "") {
+      toast.error("Please write a valid value")
+    }
+    else if (priority === "choose") {
+      toast.error("Please select priority")
+    }
+    else {
+      e.preventDefault();
+      dispatch(addWork({
+        name: work,
+        priority: priority,
+      }))
+      toast.success("Work added")
+
+    }
+  }
+
+
+
   return (
-    <section className={styles.form}>
+    <>
+      <section className={styles.form}>
+        <form onSubmit={handleSubmit}>
+          <div className={styles["form-container"]}>
+            <div className={styles["input-box"]}>
+              <input required value={work} onChange={(e) => { handleInputChange(e) }} type="text" />
+              <label>Work Name</label>
+            </div>
+            <div className={styles["select-box"]}>
+              <label htmlFor="select">
+                Priority
+              </label>
+              <select onChange={(e) => { setPriority(e.target.value) }} value={priority}>
+                <option value="choose">Choose</option>
+                <option value="urgent">Urgent</option>
+                <option value="regular">Regular</option>
+                <option value="trivial">Trivial</option>
+              </select>
+            </div>
 
-      <form onSubmit={handleSubmit}>
-        <div className={styles["form-container"]}>
-          <div className={styles["input-box"]}>
-            <input value={job} onChange={(e) => { setJob(e.target.value) }} type="text" />
-            <label>Job Name</label>
+
+            <button
+              type='submit'
+              className={styles.btn}>
+              <HiOutlinePlus className={styles.icon} size={20} />
+            </button>
           </div>
-
-          <select onChange={(e) => { setPriority(e.target.value) }} value={priority}>
-            <option value="urgent">Urgent</option>
-            <option value="regular">Regular</option>
-            <option value="trivial">Trivial</option>
-          </select>
-
-
-          <button
-            type='submit'
-            className={styles.btn}>
-            <HiOutlinePlus className={styles.icon} size={20} />
-          </button>
-        </div>
-      </form>
+        </form>
 
 
 
-    </section>
+      </section>
+    </>
   )
 }
 

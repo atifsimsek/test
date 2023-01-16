@@ -1,19 +1,26 @@
 import { Modal } from 'antd';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editJob, selectSelectedJob } from '../redux/Slice/jobsSlice';
+import { toast } from 'react-toastify';
+import { editWork, selectSelectedWork } from '../redux/Slice/worksSlice';
 import styles from "../styles/modules/modal.module.scss"
 
 const EditModal = ({ open, setOpen }) => {
 
-  const [changedPriority, setChangedPriority] = useState("")
-  const { id, name } = useSelector(selectSelectedJob)
+  const [changedPriority, setChangedPriority] = useState("choose")
+  const { id, name } = useSelector(selectSelectedWork)
   const dispatch = useDispatch()
 
 
   const handleOk = () => {
-    dispatch(editJob({ id, priority: changedPriority }))
-    setOpen(false);
+    if (changedPriority === "choose") {
+      toast.error("Please select priortiy")
+    }
+    else {
+      dispatch(editWork({ id, priority: changedPriority }))
+      toast.success("Work edited")
+      setOpen(false);
+    }
   };
   const handleCancel = () => {
     setOpen(false);
@@ -23,7 +30,7 @@ const EditModal = ({ open, setOpen }) => {
   return (
     <>
       <Modal
-        title="Edit Job"
+        title="Edit Work"
         open={open}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -32,13 +39,21 @@ const EditModal = ({ open, setOpen }) => {
       >
         <div className={styles["inputs-container"]}>
           <div className={styles["input-box"]}>
+            <label htmlFor="">Work Name</label>
             <input value={name} disabled type="text" />
           </div>
-          <select value={changedPriority} onChange={(e) => { setChangedPriority(e.target.value) }} >
-            <option value="urgent">Urgent</option>
-            <option value="regular">Regular</option>
-            <option value="trivial">Trivial</option>
-          </select>
+
+          <div className={styles["select-box"]}>
+            <label htmlFor="select">
+              Priority
+            </label>
+            <select value={changedPriority} onChange={(e) => { setChangedPriority(e.target.value) }} >
+              <option value="choose">Choose</option>
+              <option value="urgent">Urgent</option>
+              <option value="regular">Regular</option>
+              <option value="trivial">Trivial</option>
+            </select>
+          </div>
         </div>
 
       </Modal>
@@ -47,27 +62,3 @@ const EditModal = ({ open, setOpen }) => {
 };
 export default EditModal;
 
-
-
-
-
-
-
-
-
-
-
-
-{/* <section className={styles.modal}>
-<form action="">
-  <input disabled={true} type="text" />
-  <select onChange={() => { }} >
-    <option value="urgent">Urgent</option>
-    <option value="regular">Regular</option>
-    <option value="trivial">Trivial</option>
-  </select>
-  <button>Cancel</button>
-  <button>Edit</button>
-</form>
-
-</section> */}
