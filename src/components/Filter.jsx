@@ -6,7 +6,7 @@ import { filteredWorksSelect, filterWork, searchWork } from '../redux/Slice/filt
 import { selectWorks } from '../redux/Slice/worksSlice'
 
 const Filter = () => {
-  const [search, setSearch] = useState(" ")
+  const [search, setSearch] = useState("")
   const [filter, setFilter] = useState("all")
   const works = useSelector(selectWorks)
   const filteredWorks = useSelector(filteredWorksSelect)
